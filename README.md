@@ -21,8 +21,9 @@ require('./fast-selenium.js');
 
 ```
 #### Python
+
+##### Note: In Python 3, some modules has been renamed. Use accordingly from `python2` or `python3` folder in this repository 
 ```
 import fast_selenium
 
 ```
-Note: In Python 3, some modules has been renamed. Use accordingly from `python2` or `python3` folder in this repository 
