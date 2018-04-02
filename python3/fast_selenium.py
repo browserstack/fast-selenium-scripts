@@ -47,7 +47,7 @@ class BsRemoteConnection(RemoteConnection):
             LOGGER.info('Could not get IP address for host: %s' %
                         parsed_url.hostname)
 
-        self._conn = httplib.HTTPConnection(str(addr),str(parsed_url.port or 80))
+        self._conn = http.client.HTTPConnection(str(addr),str(parsed_url.port or 80))
 
     def _request(self, arg1, arg2=None, body=None, data=None, method=None):
         """
@@ -79,7 +79,8 @@ class BsRemoteConnection(RemoteConnection):
 
         # for basic auth
         if parsed_url.username:
-            auth = base64.standard_b64encode('%s:%s' % (parsed_url.username, parsed_url.password)).replace('\n','')
+            credentials = '%s:%s' % (parsed_url.username, parsed_url.password)
+            auth = base64.standard_b64encode(credentials.encode()).decode().replace('\n','')
             # Authorization header
             headers["Authorization"] = "Basic %s" % auth
 
