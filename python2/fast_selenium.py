@@ -1,5 +1,6 @@
 # Copyright 2013 BrowserStack
 
+from selenium.webdriver.remote import webdriver
 import base64
 import httplib
 import logging
@@ -13,22 +14,24 @@ from selenium.webdriver.remote.errorhandler import ErrorCode
 from selenium.webdriver.remote.webdriver import RemoteConnection
 
 try:
-  from urllib2 import parse
+    from urllib2 import parse
 except ImportError:
-  import urlparse as parse
+    import urlparse as parse
 
 LOGGER = logging.getLogger(__name__)
+
+
 class BsRemoteConnection(RemoteConnection):
     """
     A connection with the Remote WebDriver server.
     Communicates with the server using the WebDriver wire protocol:
     http://code.google.com/p/selenium/wiki/JsonWireProtocol
     """
-    # akshay:ryan@127.0.0.1:4444
-    def __init__(self, remote_server_addr,keep_alive=True,resolve_ip=True):
+
+    def __init__(self, remote_server_addr, keep_alive=True, resolve_ip=True):
         # Attempt to resolve the hostname and get an IP address.
         super(BsRemoteConnection, self).__init__(remote_server_addr)
-	self.keep_alive = keep_alive
+        self.keep_alive = keep_alive
         parsed_url = parse.urlparse(remote_server_addr)
         addr = ""
         if parsed_url.hostname:
@@ -46,7 +49,8 @@ class BsRemoteConnection(RemoteConnection):
                 LOGGER.info('Could not get IP address for host: %s' %
                             parsed_url.hostname)
 
-        self._conn = httplib.HTTPConnection(str(addr),str(parsed_url.port or 80))
+        self._conn = httplib.HTTPConnection(
+            str(addr), str(parsed_url.port or 80))
 
     def _request(self, arg1, arg2=None, body=None, data=None, method=None):
         """
@@ -58,13 +62,13 @@ class BsRemoteConnection(RemoteConnection):
         :Returns:
           A dictionary with the server's parsed JSON response.
         """
-	if method == None:
-	    method = arg1
-	    url = arg2
-	else:
-	    url = arg1
-	if body == None:
-	    body = data
+        if method == None:
+            method = arg1
+            url = arg2
+        else:
+            url = arg1
+        if body == None:
+            body = data
 
         LOGGER.debug('%s %s %s' % (method, url, body))
 
@@ -78,15 +82,16 @@ class BsRemoteConnection(RemoteConnection):
 
         # for basic auth
         if parsed_url.username:
-            auth = base64.standard_b64encode('%s:%s' % (parsed_url.username, parsed_url.password)).replace('\n','')
+            auth = base64.standard_b64encode('%s:%s' % (
+                parsed_url.username, parsed_url.password)).replace('\n', '')
             # Authorization header
             headers["Authorization"] = "Basic %s" % auth
 
-	self._conn.request(method, parsed_url.path, body, headers)
+        self._conn.request(method, parsed_url.path, body, headers)
         resp = self._conn.getresponse()
         statuscode = resp.status
         statusmessage = resp.msg
-        LOGGER.debug('%s %s' %(statuscode, statusmessage))
+        LOGGER.debug('%s %s' % (statuscode, statusmessage))
         data = resp.read()
         try:
             if statuscode > 399 and statuscode < 500:
@@ -107,8 +112,6 @@ class BsRemoteConnection(RemoteConnection):
 
                 assert type(data) is dict, (
                     'Invalid server response body: %s' % body)
-                assert 'status' in data, (
-                    'Invalid server response; no status: %s' % body)
                 # Some of the drivers incorrectly return a response
                 # with no 'value' field when they should return null.
                 if 'value' not in data:
@@ -120,5 +123,5 @@ class BsRemoteConnection(RemoteConnection):
         finally:
             LOGGER.debug("Finished Request")
 
-from selenium.webdriver.remote import webdriver
+
 webdriver.RemoteConnection = BsRemoteConnection
