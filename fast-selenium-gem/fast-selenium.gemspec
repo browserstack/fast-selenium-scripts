@@ -8,4 +8,5 @@ Gem::Specification.new do |s|
   ]
   s.require_paths = ["lib"]
   s.authors     = ["Browserstack"]
+  s.add_runtime_dependency 'curb', ['= 0.9.9']
 end
