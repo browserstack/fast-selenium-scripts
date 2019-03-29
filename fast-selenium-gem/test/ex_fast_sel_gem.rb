@@ -4,7 +4,7 @@ require 'selenium-webdriver'
 # Input capabilities
 caps = Selenium::WebDriver::Remote::Capabilities.new
 caps['browser'] = 'Chrome'
-caps['build'] = 'fast selennium gem'
+caps['build'] = 'fast selenium gem'
 caps['name'] = "fast selenium version #{Gem.loaded_specs["selenium-webdriver"].version.to_s}"
 puts "Testing fast selenium script on version: #{Gem.loaded_specs["selenium-webdriver"].version.to_s}"
 driver = Selenium::WebDriver.for(:remote,
