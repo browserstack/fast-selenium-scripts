@@ -1,4 +1,4 @@
-# fast-selenium
+# browserstack-fast-selenium
 
 fast-selenium gem to speed up your selenium tests on BrowserStack.
 
@@ -8,19 +8,19 @@ This works by enabling [HTTP persistent connection ](https://en.wikipedia.org/wi
 
 ## Install
 
-    gem install fast-selenium
+    gem install browserstack-fast-selenium
 
 ## Usage
 
 All you have to do is to include it in your code. 
 
-    require 'fast-selenium'
+    require 'browserstack-fast-selenium'
 
 ## Example
 
 ```
 require 'selenium-webdriver'
-require 'fast-selenium'
+require 'browserstack-fast-selenium'
 
 # Input capabilities
 caps = Selenium::WebDriver::Remote::Capabilities.new
