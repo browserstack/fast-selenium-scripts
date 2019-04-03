@@ -1,4 +1,4 @@
-require 'fast-selenium'
+require 'browserstack-fast-selenium'
 require 'selenium-webdriver'
 
 # Input capabilities

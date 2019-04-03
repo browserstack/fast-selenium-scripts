@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.date = %q{2019-03-26}
   s.summary = %q{fast-selenium gem to speed up your selenium tests on BrowserStack.}
   s.files = [
-    "lib/fast-selenium.rb"
+    "lib/browserstack-fast-selenium.rb"
   ]
   s.metadata = {
     'source_code_uri' => 'https://github.com/browserstack/fast-selenium-scripts/tree/master/fast-selenium-gem'
