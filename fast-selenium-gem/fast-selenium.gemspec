@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = %q{browserstack-fast-selenium}
-  s.version = "1.0.0"
-  s.date = %q{2019-03-26}
+  s.version = "1.0.2"
+  s.date = %q{2019-06-27}
   s.summary = %q{fast-selenium gem to speed up your selenium tests on BrowserStack.}
   s.files = [
     "lib/browserstack-fast-selenium.rb"
