@@ -1,5 +1,4 @@
 require 'browserstack-fast-selenium'
-require 'selenium-webdriver'
 
 # Input capabilities
 caps = Selenium::WebDriver::Remote::Capabilities.new
