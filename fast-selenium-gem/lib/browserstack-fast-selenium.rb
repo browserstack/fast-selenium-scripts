@@ -1,4 +1,4 @@
-require 'selenium-webDriver' if !defined?(Selenium::WebDriver)
+require 'selenium-webdriver'
 require 'selenium/webdriver/remote/http/curb'
 
 module Selenium
