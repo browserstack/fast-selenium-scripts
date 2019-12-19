@@ -19,7 +19,6 @@ All you have to do is to include it in your code.
 ## Example
 
 ```rb
-require 'selenium-webdriver'
 require 'browserstack-fast-selenium'
 
 # Input capabilities
