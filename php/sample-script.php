@@ -19,11 +19,11 @@
         $caps
     );
 
-    // Include after initiating Web Driver
-    $web_driver->setCommandExecutor((
-        new FastHttpCommandExecutor($web_driver->getCommandExecutor()
-            ->getAddressOfRemoteServer()))
-            ->setHeaders());
+    /* Include after initiating Web Driver
+       Include $http_proxy and $http_proxy_port as required */
+    $web_driver->setCommandExecutor(
+        (new FastHttpCommandExecutor($url))->setHeaders()
+    );
 
     $web_driver->get("https://www.google.com");
     $element = $web_driver->findElement(WebDriverBy::name("q"));

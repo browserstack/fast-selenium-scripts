@@ -32,8 +32,9 @@ require_once('./fast-selenium.php');
 ```
 Add following line after initiating `RemoteWebDriver`:
 ```php
-$web_driver->setCommandExecutor((
-    new FastHttpCommandExecutor($web_driver->getCommandExecutor()
-        ->getAddressOfRemoteServer()))
-        ->setHeaders());
+$web_driver->setCommandExecutor(
+    (new FastHttpCommandExecutor($url))
+    ->setHeaders()
+);
 ```
+Note: Include `$http_proxy` and `$http_proxy_port` as required. 
